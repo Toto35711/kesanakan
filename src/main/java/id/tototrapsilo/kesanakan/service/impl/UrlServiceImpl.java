@@ -14,7 +14,7 @@ public class UrlServiceImpl implements UrlService {
     @Autowired
     UrlRepository urlRepository;
     @Override
-    public String getUrlByKey(Integer key) {
+    public String getUrlByKey(String key) {
         Url url = urlRepository.findById(key).orElse(null);
         return url != null ? url.getTargetUrl() : null;
     }

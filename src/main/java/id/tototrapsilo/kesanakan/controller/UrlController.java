@@ -12,7 +12,7 @@ public class UrlController {
     UrlService urlService;
     @RequestMapping(value = "/{key}", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<String> getUrlByKey(@PathVariable Integer key){
+    public ResponseEntity<String> getUrlByKey(@PathVariable String key){
         String url = urlService.getUrlByKey(key);
         return ResponseEntity.ok(url);
     }
