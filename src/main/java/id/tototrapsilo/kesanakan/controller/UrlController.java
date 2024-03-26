@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-@RestController
+@RestController(value="/url")
 public class UrlController {
     @Autowired
     UrlService urlService;
@@ -16,9 +16,9 @@ public class UrlController {
         String url = urlService.getUrlByKey(key);
         return ResponseEntity.ok(url);
     }
-    @RequestMapping(value="/{targetUrl}", method = RequestMethod.POST)
+    @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Url> shortenUrl(@PathVariable String targetUrl){
+    public ResponseEntity<Url> shortenUrl(@RequestBody String targetUrl){
         Url url = urlService.shortenUrl(targetUrl);
 
         return ResponseEntity.ok(url);
