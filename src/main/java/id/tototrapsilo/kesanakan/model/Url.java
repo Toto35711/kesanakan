@@ -9,6 +9,7 @@ import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 
@@ -18,6 +19,7 @@ import java.time.LocalDateTime;
 @Builder
 @RedisHash()
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
+@Slf4j
 public class Url {
     @Id
     @NonNull

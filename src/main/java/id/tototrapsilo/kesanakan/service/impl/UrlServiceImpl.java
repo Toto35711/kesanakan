@@ -12,11 +12,11 @@ import java.time.LocalDateTime;
 @Service
 public class UrlServiceImpl implements UrlService {
     @Autowired
-    UrlRepository urlRepository;
+    private UrlRepository urlRepository;
     @Override
     public String getUrlByKey(String key) {
         Url url = urlRepository.findById(key).orElse(null);
-        return url != null ? url.getTargetUrl() : null;
+        return url != null ? url.getTargetUrl().replaceAll("^\"|\"$", "") : null;
     }
 
     @Override
