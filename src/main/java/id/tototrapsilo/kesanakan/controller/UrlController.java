@@ -8,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -21,14 +20,13 @@ public class UrlController {
     private UrlService urlService;
 
     @RequestMapping(value = "/{key}", method=RequestMethod.GET)
-    public RedirectView redirectUrl(@PathVariable String key, HttpServletRequest request, HttpServletResponse response) throws IOException, URISyntaxException, Exception {
+    public void redirectUrl(@PathVariable String key, HttpServletRequest request, HttpServletResponse response) throws IOException, URISyntaxException, Exception {
         String redirectUrlString = urlService.getUrlByKey(key);
+        log.info("target URL: "+redirectUrlString);
         if (redirectUrlString == null) {
-            redirectUrlString = "https://www.tototrapsilo.id/404";
+            redirectUrlString = "https://www.tototrapsilo.id";
         }
-        RedirectView redirectView = new RedirectView();
-        redirectView.setUrl(redirectUrlString);
-        return redirectView;
+        response.sendRedirect(redirectUrlString);
     }
 
     @RequestMapping(method = RequestMethod.POST)
